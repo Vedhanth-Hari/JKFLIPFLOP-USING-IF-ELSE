@@ -46,45 +46,73 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **PROGRAM**
 
-module sr_ff(s,r,clk,q,qbar);
+module jk_flip_flop(q, qb,j,k,clock,reset);
 
-input s,r,clk;
+input j,k,clock,reset;
 
-output reg q;
+output reg q, qb;
+always @ (posedge (clock))
 
-output reg qbar; initial
+begin 
+
+    if (!reset)
+    
+        begin
+        
+           q <= q;
+           
+           qb <=qb;
+       
+        end
+else //Write logic for JK flipflop using if else statement for four conditions
 
 begin
 
-q=0;
+           if (j == 0 && k == 0)
+           
+                begin
+                
+                q <= q;
+                
+                qb <= qb;
+                
+                end 
+else if (j != k)
 
-qbar=1;
+                begin
 
-end
+                q <= j;
+                
+                qb <= k;
+                
+                end
+           else 
+if (j == 1 && k == 1)
 
-always @(posedge clk)
-
-begin
-
-q=s|(~r&q);
-
-qbar=r|(~s&~q);
-
+                begin 
+                
+                q <= ~q; 
+                
+                qb <= ~qb; 
+                
+                end 
+        
+        end
+        
 end
 
 endmodule
-
+        
 /* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by:H.Vedhanth RegisterNumber:24003775
 */
 
 **RTL LOGIC FOR FLIPFLOPS**
 
-![Screenshot 2024-12-24 215021](https://github.com/user-attachments/assets/33a78fcb-856f-487b-a4d6-d229dd347099)
+![Screenshot 2025-01-02 100754](https://github.com/user-attachments/assets/5f7b4f41-7149-4bd5-91cc-9fd574728580)
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
 
-![Screenshot 2024-12-24 215036](https://github.com/user-attachments/assets/a49a9e4a-3ac0-4031-a5b9-f93ac51ca26a)
-
+![Screenshot 2025-01-02 100806](https://github.com/user-attachments/assets/0b69c6d3-c2b9-42d7-b1c6-a6dc3fcbf4de)
 
 **RESULTS**
 Thus the JK flipflop using verilog and validating their functionality using their functional tables are verified
